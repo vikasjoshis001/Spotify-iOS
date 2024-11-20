@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  Spotify-Clone
+
+  Created by Vikas Joshi on 20/11/24.
+  
+*/
+
+// MARK:- Tab Bar
+"home" = "Home"
+"search" = "Search"
+"Library" = "Library"
