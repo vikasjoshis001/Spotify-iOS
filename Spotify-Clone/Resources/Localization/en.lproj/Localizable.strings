@@ -7,6 +7,10 @@
 */
 
 // MARK:- Tab Bar
-"home" = "Home"
-"search" = "Search"
-"Library" = "Library"
+"home" = "Home";
+"search" = "Search";
+"Library" = "Library";
+
+// MARK:- Screen titles
+"spotify" = "Spotify";
+
