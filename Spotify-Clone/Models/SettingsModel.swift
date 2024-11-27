@@ -7,10 +7,14 @@
 
 import Foundation
 
+// MARK: - Section
+
 struct Section {
     let title: String
     let options: [Options]
 }
+
+// MARK: - Options
 
 struct Options {
     let title: String

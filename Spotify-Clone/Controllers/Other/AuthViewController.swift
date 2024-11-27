@@ -22,7 +22,7 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Sign In"
+        title = LocalizationKeys.SIGN_IN
         view.backgroundColor = .systemBackground
         webView.navigationDelegate = self
         view.addSubview(webView)
@@ -46,6 +46,5 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
             }
             
         })
-        debugPrint("Code = ", code)
     }
 }

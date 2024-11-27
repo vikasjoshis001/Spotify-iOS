@@ -43,7 +43,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                     case .success(let model):
                         self.updateProfileSection(with: model)
                     case .failure(let error):
-                        print(error.localizedDescription)
+                        debugPrint(error.localizedDescription)
                         self.failedToGetProfile()
                 }
             }
@@ -60,7 +60,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func createHeaderView(with urlString: String?) {
         guard let urlString = urlString, let url = URL(string: urlString) else { return }
-        
+        	
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.width, height: view.width/1.5))
         
         let imageSize: CGFloat = headerView.height/2
@@ -88,7 +88,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Table view is constructed")
         return models.count
     }
     
