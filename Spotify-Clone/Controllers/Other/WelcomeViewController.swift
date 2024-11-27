@@ -8,7 +8,6 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
-    
     private let signInButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBackground
@@ -27,8 +26,7 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        signInButton.frame = CGRect(x: 20, y: view.height-50-view.safeAreaInsets.bottom, width: view.width - 40, height: 50)
-        
+        signInButton.frame = CGRect(x: 20, y: view.height - 50 - view.safeAreaInsets.bottom, width: view.width - 40, height: 50)
     }
     
     @objc func didTapSignIn() {

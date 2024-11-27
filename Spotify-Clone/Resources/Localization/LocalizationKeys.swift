@@ -14,4 +14,8 @@ class LocalizationKeys {
     static var SEARCH: String { return "search".localized() }
     static var LIBRARY: String { return "library".localized() }
 
+    // MARK:- Screen titles
+    static var SPOTIFY: String { return "spotify".localized() }
+    static var SIGN_IN: String { return "sign_in".localized() }
+
 }
