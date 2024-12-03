@@ -36,7 +36,7 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemGray3
+        contentView.backgroundColor = UIColor(hex: "#101020")
         contentView.addSubview(trackCoverImageView)
         contentView.addSubview(trackNameLabel)
         contentView.addSubview(trackOwnerNameLabel)

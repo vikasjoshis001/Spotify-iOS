@@ -41,7 +41,7 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        categoryNameLabel.sizeToFit() // Adjusts the size to fit the content
+        categoryNameLabel.sizeToFit()
         categoryCoverImageView.sizeToFit()
         
         let imageSize = contentView.height - 25
@@ -50,13 +50,10 @@ class CategoriesCollectionViewCell: UICollectionViewCell {
                                               width: imageSize,
                                               height: imageSize)
         
-        categoryCoverImageView.backgroundColor = .blue
-
         categoryNameLabel.frame = CGRect(x: (contentView.width - categoryNameLabel.width) / 2,
                                          y: categoryCoverImageView.bottom + 3,
                                          width: categoryNameLabel.width,
                                          height: categoryNameLabel.height)
-//        categoryNameLabel.backgroundColor = .red
     }
     
     override func prepareForReuse() {
