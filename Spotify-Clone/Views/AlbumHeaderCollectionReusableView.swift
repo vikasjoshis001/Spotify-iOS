@@ -1,5 +1,5 @@
 //
-//  PlaylistHeaderCollectionReusableView.swift
+//  AlbumHeaderCollectionReusableView.swift
 //  Spotify-Clone
 //
 //  Created by Vikas Joshi on 29/11/24.
@@ -8,14 +8,14 @@
 import UIKit
 import SDWebImage
 
-protocol PlaylistHeaderCollectionReusableViewDelegate: AnyObject {
-    func PlaylistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView)
+protocol AlbumHeaderCollectionReusableViewDelegate: AnyObject {
+    func PlaylistHeaderCollectionReusableViewDidTapPlayAll(_ header: AlbumHeaderCollectionReusableView)
 }
 
-class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
+class AlbumHeaderCollectionReusableView: UICollectionReusableView {
     static let identifier = Constants.PLAYLIST_HEADER
     
-    weak var delegate: PlaylistHeaderCollectionReusableViewDelegate?
+    weak var delegate: AlbumHeaderCollectionReusableViewDelegate?
     
     private let albumCoverImageView: UIImageView = {
         let albumCoverImageView = UIImageView()
@@ -97,7 +97,7 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         delegate?.PlaylistHeaderCollectionReusableViewDidTapPlayAll(self)
     }
     
-    func configure(with viewModel: PlaylistHeaderViewModel) {
+    func configure(with viewModel: AlbumHeaderViewModel) {
         albumCoverImageView.sd_setImage(with: viewModel.artworkURL)
         albumNameLabel.text = viewModel.name
         albumOwnerNameLabel.text = viewModel.ownerName

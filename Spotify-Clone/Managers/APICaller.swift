@@ -86,7 +86,6 @@ final class APICaller {
     // MARK: - Get new releases
 
     public func getNewReleases(completion: @escaping (Result<NewReleasesResponse, Error>) -> Void) {
-        debugPrint("User Id in new releases api call :- ", UserDefaults.standard.string(forKey: "user_id"))
         let url = convertURLStringToURL(using: "\(EndPoints.browseNewReleases)")
         createRequest(with: url, type: .GET) { baseRequest in
             let task = URLSession.shared.dataTask(with: baseRequest) { data, _, error in
@@ -128,7 +127,6 @@ final class APICaller {
     // MARK: - Get specific album
     public func getAlbums(albumId: String, completion: @escaping(Result<AlbumDetails, Error>) -> Void) {
         let url = convertURLStringToURL(using: "\(EndPoints.getAlbum)/\(albumId)")
-        debugPrint("URL = ", url)
         createRequest(with: url, type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
