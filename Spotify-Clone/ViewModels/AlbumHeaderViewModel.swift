@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PlaylistHeaderViewModel {
+struct AlbumHeaderViewModel {
     let name: String
     let ownerName: String
     let description: String

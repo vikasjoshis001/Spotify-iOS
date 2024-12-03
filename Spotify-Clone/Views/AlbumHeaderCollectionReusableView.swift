@@ -1,5 +1,5 @@
 //
-//  PlaylistHeaderCollectionReusableView.swift
+//  AlbumHeaderCollectionReusableView.swift
 //  Spotify-Clone
 //
 //  Created by Vikas Joshi on 29/11/24.
@@ -9,10 +9,10 @@ import UIKit
 import SDWebImage
 
 protocol PlaylistHeaderCollectionReusableViewDelegate: AnyObject {
-    func PlaylistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView)
+    func PlaylistHeaderCollectionReusableViewDidTapPlayAll(_ header: AlbumHeaderCollectionReusableView)
 }
 
-class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
+class AlbumHeaderCollectionReusableView: UICollectionReusableView {
     static let identifier = Constants.PLAYLIST_HEADER
     
     weak var delegate: PlaylistHeaderCollectionReusableViewDelegate?
