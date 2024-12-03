@@ -14,6 +14,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
+        
+        // Style text attributes
+        UINavigationBar.appearance().titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        
         if AuthManager.shared.isSignedIn {
             AuthManager.shared.refreshAccessToken(completion: nil)
             window.rootViewController = TabBarViewController()
@@ -25,6 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window.rootViewController = navVC
         }
         window.makeKeyAndVisible()
+        window.backgroundColor = .black
         self.window = window
     }
 

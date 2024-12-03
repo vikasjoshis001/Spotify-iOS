@@ -13,6 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // Style text attributes
+        UINavigationBar.appearance().titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        UINavigationBar.appearance().largeTitleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+        
         if AuthManager.shared.isSignedIn {
             AuthManager.shared.refreshAccessToken(completion: nil)
             window.rootViewController = TabBarViewController()
@@ -24,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.rootViewController = navVC
         }
         window.makeKeyAndVisible()
+        window.backgroundColor = .black
         self.window = window
 
         return true

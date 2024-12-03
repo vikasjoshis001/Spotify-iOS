@@ -19,9 +19,12 @@ final class APICaller {
     enum EndPoints {
         static let userProfile = "me"
         static let browseNewReleases = "browse/new-releases"
-        static let browseFeaturedPlaylists = "browse/featured-playlists?limit=2"
+        static let browseFeaturedPlaylists = "browse/featured-playlists"
+        static let browseCategories = "browse/categories"
         static let recommendations = "recommendations"
         static let recommendationGenres = "recommendations/available-genre-seeds"
+        static let getAlbum = "albums"
+        static let getAlbumTracks = "tracks"
     }
     
     enum APIErrors {
@@ -40,10 +43,13 @@ final class APICaller {
                                completion: @escaping (URLRequest) -> Void)
     {
         debugPrint("API URL:- ", url ?? "")
+
         AuthManager.shared.withValidToken { token in
             guard let apiURL = url else { return }
             var request = URLRequest(url: apiURL)
-            request.setValue("Bearer \(token) ", forHTTPHeaderField: "Authorization")
+            let bearerToken = "Bearer \(token) "
+            debugPrint("Access Token:- \(bearerToken)")
+            request.setValue(bearerToken, forHTTPHeaderField: "Authorization")
             request.httpMethod = type.rawValue
             completion(request)
         }
@@ -80,13 +86,15 @@ final class APICaller {
     // MARK: - Get new releases
 
     public func getNewReleases(completion: @escaping (Result<NewReleasesResponse, Error>) -> Void) {
-        let url = convertURLStringToURL(using: EndPoints.browseNewReleases)
+        debugPrint("User Id in new releases api call :- ", UserDefaults.standard.string(forKey: "user_id"))
+        let url = convertURLStringToURL(using: "\(EndPoints.browseNewReleases)")
         createRequest(with: url, type: .GET) { baseRequest in
             let task = URLSession.shared.dataTask(with: baseRequest) { data, _, error in
                 guard let data = data, error == nil else { return }
                 do {
                     let result = try JSONDecoder().decode(NewReleasesResponse.self, from: data)
                     completion(.success(result))
+
                 } catch {
                     completion(.failure(error))
                 }
@@ -95,10 +103,10 @@ final class APICaller {
         }
     }
     
-    // MARK: - Get features playlists
-
-    public func getFeaturedPlaylists(completion: @escaping (Result<FeaturedPlaylistsResponse, Error>) -> Void) {
-        let url = convertURLStringToURL(using: EndPoints.browseFeaturedPlaylists)
+    
+    // MARK: - Get categories
+    public func getCategories(completion: @escaping(Result<CategoryResponse, Error>) -> Void) {
+        let url = convertURLStringToURL(using: EndPoints.browseCategories)
         createRequest(with: url, type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
@@ -106,7 +114,7 @@ final class APICaller {
                     return
                 }
                 do {
-                    let result = try JSONDecoder().decode(FeaturedPlaylistsResponse.self, from: data)
+                    let result = try JSONDecoder().decode(CategoryResponse.self, from: data)
                     completion(.success(result))
                 } catch {
                     completion(.failure(error))
@@ -116,11 +124,11 @@ final class APICaller {
         }
     }
     
-    // MARK: - Get recommendations
-
-    public func getRecommendations(seed_genres: Set<String>, completion: @escaping (Result<RecommendationsResponse, Error>) -> Void) {
-        let genres = seed_genres.joined(separator: ",")
-        let url = convertURLStringToURL(using: "\(EndPoints.recommendations)?seed_genres=\(genres)&limit=40")
+    
+    // MARK: - Get specific album
+    public func getAlbums(albumId: String, completion: @escaping(Result<AlbumDetails, Error>) -> Void) {
+        let url = convertURLStringToURL(using: "\(EndPoints.getAlbum)/\(albumId)")
+        debugPrint("URL = ", url)
         createRequest(with: url, type: .GET) { request in
             let task = URLSession.shared.dataTask(with: request) { data, _, error in
                 guard let data = data, error == nil else {
@@ -128,8 +136,10 @@ final class APICaller {
                     return
                 }
                 do {
-                    let result = try JSONDecoder().decode(RecommendationsResponse.self, from: data)
+                    let result = try JSONDecoder().decode(AlbumDetails.self, from: data)
+                    completion(.success(result))
                 } catch {
+                    debugPrint(error.localizedDescription)
                     completion(.failure(error))
                 }
             }
@@ -137,24 +147,5 @@ final class APICaller {
         }
     }
     
-    // MARK: - Get recommendations genres
-
-    public func getRecommendationsGenres(completion: @escaping (Result<RecommendedGenresResponse, Error>) -> Void) {
-        let url = convertURLStringToURL(using: EndPoints.recommendationGenres)
-        createRequest(with: url, type: .GET) { request in
-            let task = URLSession.shared.dataTask(with: request) { data, _, error in
-                guard let data = data, error == nil else {
-                    completion(.failure(APIErrors.failureMessage as! Error))
-                    return
-                }
-                do {
-                    let result = try JSONDecoder().decode(RecommendedGenresResponse.self, from: data)
-                    completion(.success(result))
-                } catch {
-                    completion(.failure(error))
-                }
-            }
-            task.resume()
-        }
-    }
+    
 }

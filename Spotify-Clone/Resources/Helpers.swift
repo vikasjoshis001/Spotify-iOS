@@ -19,4 +19,9 @@ extension String {
         
         return localizedString
     }
+    
+    public func getCurrentUserId() -> String? {
+        guard let userId = UserDefaults.standard.string(forKey: "user_id") else { return nil }
+        return userId
+    }
 }

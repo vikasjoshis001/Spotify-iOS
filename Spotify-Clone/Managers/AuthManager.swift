@@ -17,7 +17,7 @@ final class AuthManager {
         static let clientSecret = "a8c74f8e158f4160a5199624fc868cfd"
         static let baseURL = "https://accounts.spotify.com/"
         static let redirectURI = "https://shadibiodata.com/"
-        static let scope = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email"
+        static let scope = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email%20playlist-read-collaborative%20user-read-playback-position"
     }
     
     enum EndPoints {
