@@ -12,5 +12,7 @@ struct Constants {
     static let NEW_RELEASE = "NewReleaseCollectionViewCell"
     static let FEATURED_PLAYLIST = "FeaturedPlaylistCollectionViewCell"
     static let RECOMMENDED_TRACK = "RecommendedTrackCollectionViewCell"
-
+    static let CATEGORIES = "CategoriesCellViewModel"
+    static let TITLE_HEADER = "TitleHeaderCollectionReusableView"
+    static let PLAYLIST_HEADER = "PlaylistHeaderCollectionReusableView"
 }

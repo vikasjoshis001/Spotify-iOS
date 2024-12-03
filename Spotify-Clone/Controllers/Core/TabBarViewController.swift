@@ -14,13 +14,12 @@ class TabBarViewController: UITabBarController {
         // MARK: - Home screen setup
 
         let vc1 = HomeViewController()
-        vc1.navigationItem.largeTitleDisplayMode = .always
+        vc1.navigationItem.largeTitleDisplayMode = .never
         let nav1 = UINavigationController(rootViewController: vc1)
         nav1.navigationItem.titleView?.tintColor = .label
         nav1.tabBarItem = UITabBarItem(title: LocalizationKeys.HOME,
                                        image: UIImage(systemName: "house"),
                                        tag: 1)
-        nav1.navigationBar.prefersLargeTitles = true
 
         // MARK: - Search screen setup
 

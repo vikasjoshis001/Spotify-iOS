@@ -43,16 +43,35 @@ class WelcomeViewController: UIViewController {
     
     private func handleSignIn(success: Bool) {
         // Log in success or failure
-        guard success else {
-            let alert = UIAlertController(title: "Oops",
-                                          message: "Something went wrong",
-                                          preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
-            return
+        getCurrentUserProfile { success in
+            guard success else {
+                let alert = UIAlertController(title: "Oops",
+                                              message: "Something went wrong",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                return
+            }
+            
+            DispatchQueue.main.async {
+                let mainAppTabBarVC = TabBarViewController()
+                mainAppTabBarVC.modalPresentationStyle = .fullScreen
+                self.present(mainAppTabBarVC, animated: true)
+            }
+            
         }
-        
-        let mainAppTabBarVC = TabBarViewController()
-        mainAppTabBarVC.modalPresentationStyle = .fullScreen
-        present(mainAppTabBarVC, animated: true)
+    }
+    
+    private func getCurrentUserProfile(completion: @escaping (Bool) -> Void) {
+        APICaller.shared.getCurrentUserProfile { response in
+            switch(response) {
+                case .success(let model):
+                    debugPrint("Successfully fetched user profile")
+                    UserDefaults.standard.setValue(model.id, forKey: "user_id")
+                    completion(true)
+                case .failure(let error):
+                    debugPrint(error.localizedDescription)
+                    completion(true)
+            }
+        }
     }
 }

@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct CategoriesCellViewModel {
+    let categoryCoverImageURL: URL?
+    let categoryName: String
+}
