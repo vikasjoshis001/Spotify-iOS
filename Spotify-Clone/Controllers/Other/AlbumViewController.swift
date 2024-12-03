@@ -35,7 +35,7 @@ class AlbumViewController: UIViewController {
         title = album.name
         view.addSubview(collectionView)
         collectionView.register(RecommendedTrackCollectionViewCell.self, forCellWithReuseIdentifier: Constants.RECOMMENDED_TRACK)
-        collectionView.register(PlaylistHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: Constants.PLAYLIST_HEADER)
+        collectionView.register(AlbumHeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: Constants.PLAYLIST_HEADER)
         collectionView.backgroundColor = UIColor.black
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -114,12 +114,12 @@ extension AlbumViewController: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.PLAYLIST_HEADER, for: indexPath) as? PlaylistHeaderCollectionReusableView, kind == UICollectionView.elementKindSectionHeader
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Constants.PLAYLIST_HEADER, for: indexPath) as? AlbumHeaderCollectionReusableView, kind == UICollectionView.elementKindSectionHeader
         else {
             return UICollectionReusableView()
         }
         
-        let headerViewModel = PlaylistHeaderViewModel(name: album.name,
+        let headerViewModel = AlbumHeaderViewModel(name: album.name,
                                                       ownerName: album.artists.first?.name ?? "-",
                                                       description: "Release Date: \(String.formattedDate(string: album.release_date))",
                                                       artworkURL: URL(string: album.images.first?.url ?? ""))
@@ -131,8 +131,8 @@ extension AlbumViewController: UICollectionViewDataSource, UICollectionViewDeleg
 
 // MARK: PlaylistHeaderCollectionReusableViewDelegate
 
-extension AlbumViewController: PlaylistHeaderCollectionReusableViewDelegate {
-    func PlaylistHeaderCollectionReusableViewDidTapPlayAll(_ header: PlaylistHeaderCollectionReusableView) {
+extension AlbumViewController: AlbumHeaderCollectionReusableViewDelegate {
+    func PlaylistHeaderCollectionReusableViewDidTapPlayAll(_ header: AlbumHeaderCollectionReusableView) {
         debugPrint("Playing all tracks in album")
     }
 }
